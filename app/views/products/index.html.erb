@@ -1,4 +1,18 @@
-<h2> I AMA View </h2>
+<% first_product = Product.first %>
 <p>
-  Find me in <%= Rails.root.join("app", "views", "products", __FILE__ ) %>
+  Product name: <%=first_product.name %> Cost: <%= first_product.price %>
 </p>
+<p>
+  Seller of product: <%= first_product.user.name %>
+</p>
+
+<h2>List of product</h2>
+<% all_products = Product.includes(:user).all %>
+<ul>
+  <% all_products.each do |product| %>
+  <li>
+    <p>Product: "<%= product.name %>" Cost: $<%= product.price %></p>
+    <p>Sold by: <%=product.user.name %></p>
+  </li>
+  <% end %>
+</ul>
